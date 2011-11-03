@@ -1,0 +1,28 @@
+﻿Build started 11/3/2011 12:05:09 PM.
+     1>Project "C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\__TetriShooter\__TetriShooter.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\__TetriShooter.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.exe" /NOLOGO "allegro-5.0.1-monolith-md-debug.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\__TetriShooter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.lib" /MACHINE:X86 Debug\main.obj
+         Debug\_DeadAnim.obj
+         Debug\_Enemy.obj
+         Debug\_Player.obj
+         Debug\_Projectile.obj
+         Debug\_Resource.obj
+         Debug\_Game.obj
+         Debug\_Surprise.obj
+         LINK : C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.exe not found or not built by the last incremental link; performing full link
+         __TetriShooter.vcxproj -> C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\Debug\__TetriShooter.exe;#1" /manifest Debug\__TetriShooter.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Debug\__TetriShooter.unsuccessfulbuild".
+         Touching "Debug\__TetriShooter.lastbuildstate".
+     1>Done Building Project "C:\Users\Pjata\Documents\Visual Studio 2010\Projects\__TetriShooter\__TetriShooter\__TetriShooter.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.91
