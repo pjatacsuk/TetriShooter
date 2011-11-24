@@ -40,9 +40,9 @@ typedef struct _Game {
 	int enemy_down;							//meghalt enemy-k száma
 
 	Player* player;							//a player struct-ra mutató pointer
-	Surprise* surprise;					//a surprise struct-ra mutató pointer
+	Surprise* surprise;						//a surprise struct-ra mutató pointer
 
-	ALLEGRO_SAMPLE* death_sample;	//death animációhoz a hang
+	ALLEGRO_SAMPLE* death_sample;			//death animációhoz a hang
 
 	int Keys[6];							//a lenyomadnó billentyûk kezelésére
 
@@ -51,9 +51,9 @@ typedef struct _Game {
 	int MaxProjectile;						//A maximális lövedék tipus száma
 	int MaxPlayerLife;						//A maximális PlayerLife tipus száma
 	
-	char *EnemyPath[MAX_PATH_COUNT];						//Enemy tipusuk bitmapjához utvonal
-	char *DeadAnimPath[MAX_PATH_COUNT];					//Dead anim tipusok bitmapjához utvonal
-	char *ProjectilePath[MAX_PATH_COUNT];				//projectile tipus bitmapjához utvonal
+	char *EnemyPath[MAX_PATH_COUNT];		//Enemy tipusuk bitmapjához utvonal
+	char *DeadAnimPath[MAX_PATH_COUNT];		//Dead anim tipusok bitmapjához utvonal
+	char *ProjectilePath[MAX_PATH_COUNT];	//projectile tipus bitmapjához utvonal
 	char **(*BgPath);						//background tipusokhoz utvonal
 	char *(*SurprisePath);					//a meglepikhez az útvonalak
 
@@ -78,11 +78,18 @@ void Draw(Game *MyGame);
 
 void DrawPlayer(Game *MyGame);
 
-void UpdateProjectile(Game *MyGame);
-void DrawProjectile(Game *MyGame);
-void FreeProjectile(Projectile *projectile);
-void NewProjectile(Game *MyGame,int i);
 
+
+void NewListedProjectile(Game *MyGame);
+Projectile* FreeListedProjectile(Projectile* projectile);
+bool ShootNextProjectile(ProjectileList* list);
+void UpdateListedProjectilePath(Game* MyGame);
+void UpdateListedProjectile(Game *MyGame);
+void DrawListedProjectile(Game* MyGame);
+void FreeAllListedProjectile(ProjectileList* list);
+Projectile* NextListedProjectile(ProjectileList* list);
+
+void __UpdateEnemy(Game* MyGame);
 void NewEnemy(Game* MyGame,int i);
 void FreeEnemy(Enemy *enemy);
 void UpdateEnemy(Game *MyGame);

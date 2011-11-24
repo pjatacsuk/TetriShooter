@@ -65,5 +65,8 @@
     <ClCompile Include="_DeadAnim.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="_Menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

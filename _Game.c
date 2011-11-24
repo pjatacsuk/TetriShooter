@@ -60,6 +60,8 @@ bool _InitAllegro()
 Game* _MallocMyGame()
 {
 	int i,j;
+	Projectile* eleje;
+	Projectile* vege;
 	//A MyGame változó dinamikus lefoglalása
 	Game* MyGame = (Game*)malloc(sizeof(Game));
 
@@ -78,10 +80,14 @@ Game* _MallocMyGame()
 	MyGame->surprise = (Surprise*)malloc(sizeof(Surprise));
 	
 
-	for(i=0;i<4;i++)
-	{
-		MyGame->player->projectile[i] = (Projectile*)malloc(sizeof(Resource));
-	}
+	//projectile list lefoglalás
+	eleje = (Projectile*)malloc(sizeof(Projectile));
+	vege = (Projectile*)malloc(sizeof(Projectile));
+	MyGame->player->proj_list = (ProjectileList*)malloc(sizeof(ProjectileList));
+	MyGame->player->proj_list->eleje = eleje;
+	MyGame->player->proj_list->vege = vege;
+	MyGame->player->proj_list->eleje->kovetkezo = vege;
+	MyGame->player->proj_list->vege->elozo = eleje;
 	
 	for(i=0;i<10;i++)
 	{
@@ -134,11 +140,10 @@ void _FreeMyGame(Game* MyGame)
 		
 		free(MyGame->resource[i]);
 	}
-	for(i=0;i<4;i++)
-	{
-		FreeProjectile(MyGame->player->projectile[i]);
-		free(MyGame->player->projectile[i]);
-	}
+	
+	FreeAllListedProjectile(MyGame->player->proj_list);
+
+
 	for(i=0;i<10;i++)
 	{
 		FreeEnemy(MyGame->enemy[i]);
@@ -167,7 +172,9 @@ void _FreeMyGame(Game* MyGame)
 	al_destroy_sample(MyGame->player->sample);
 	al_destroy_sample(MyGame->player->boost);
 	al_destroy_sample(MyGame->death_sample);
+	
 	free(MyGame->player);
+
 	/*if(MyGame->surprise->bmp)
 	{
 	al_destroy_bitmap(MyGame->surprise->bmp); problémás
@@ -239,10 +246,8 @@ void _FreeMyGame(Game* MyGame)
 	//surprise incializálás
 	
 	//projectile inicializálás
-	for(i=0;i<4;i++)
-	{
-		NewProjectile(MyGame,i);
-	}
+	
+	NewListedProjectile(MyGame);
 
 	//enemy-ik inicializálása
 	for(i=0;i<10;i++)
@@ -300,7 +305,7 @@ void Draw(Game *MyGame)
 	al_draw_bitmap(MyGame->bg_background,0,0,0);
 	al_draw_bitmap(MyGame->bg_foreground,0,0,0);
 	DrawPlayer(MyGame);
-	DrawProjectile(MyGame);
+	DrawListedProjectile(MyGame);
 	DrawSurprise(MyGame->surprise);
 	DrawEnemy(MyGame);
 	
@@ -342,21 +347,25 @@ bool _GameLoop(Game *MyGame)
 			switch(ev.keyboard.keycode)
 			{
 				case ALLEGRO_KEY_W:
+				case ALLEGRO_KEY_UP:
 					MyGame->Keys[UP] = 1;
 					
 				break;
 				
 				case ALLEGRO_KEY_A:
+				case ALLEGRO_KEY_LEFT:
 					MyGame->Keys[LEFT] = 1;
 					
 				break;
 
 				case ALLEGRO_KEY_S:
+				case ALLEGRO_KEY_DOWN:
 					MyGame->Keys[DOWN] = 1;
 					
 				break;
 
 				case ALLEGRO_KEY_D:
+				case ALLEGRO_KEY_RIGHT:
 					MyGame->Keys[RIGHT] = 1;
 					
 				break;
@@ -366,6 +375,7 @@ bool _GameLoop(Game *MyGame)
 					
 					break;
 				case ALLEGRO_KEY_LSHIFT:
+				case ALLEGRO_KEY_RSHIFT:
 					MyGame->Keys[SHIFT] = 1;
 					al_play_sample(MyGame->player->boost,0.3,0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 					break;
@@ -421,8 +431,8 @@ bool _GameLoop(Game *MyGame)
 			 
 			 Draw(MyGame);
 			 UpdatePlayer(MyGame->player,MyGame->Keys);
-			 UpdateProjectile(MyGame);
-			 UpdateEnemy(MyGame);
+			 UpdateListedProjectile(MyGame);
+			 __UpdateEnemy(MyGame);
 			 UpdateSurprise(MyGame->surprise);
 		 
 			 al_flip_display();

@@ -11,6 +11,7 @@
 bool ColDetect(int key,Player* player)
 {
 	
+	
 	/* Eset szétválasztás a négy irány szerint */
 	switch(key)
 	{
@@ -82,6 +83,7 @@ void UpdatePlayer(Player* player,int* keys)
 	div_t eredm;
 	static int db;
 	int i;
+	Projectile* iter = player->proj_list->eleje->kovetkezo;
 	for(i=0;i<4;i++)
 	{
 		if(ColDetect(i,player) == 0  && keys[i] == 1)
@@ -128,19 +130,22 @@ void UpdatePlayer(Player* player,int* keys)
 				}
 			}
 		}
-		if(player->projectile[i]->shot != true)
-		{
-			player->projectile[i]->coord.x = player->coord.x;
-			player->projectile[i]->coord.y = player->coord.y -75;
-		}
-
+		
 				eredm = div((int)(player->coord.x),15);
 		player->coord.x = eredm.quot*15;
 				eredm = div((int)(player->coord.y),15);
 		player->coord.y = eredm.quot*15;
 	}
+	for(iter;iter != player->proj_list->vege;iter = iter->kovetkezo)
+	{
+		if(iter->shot != true)
+		{
+			iter->coord.x = player->coord.x;
+			iter->coord.y = player->coord.y-75;
+		}
+	}
 
-
+	
 					
 }
 

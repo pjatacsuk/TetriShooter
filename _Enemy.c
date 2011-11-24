@@ -65,18 +65,19 @@ void FreeEnemy(Enemy *enemy)
 
 }
 
-
-/** Az enemy-k frissitese, es az enemykkel kapcsolatos dolgok kezelese
+/** Az enemy-k frissitese, es az enemykkel kapcsolatos dolgok kezelese 2. verzio
 * @param Game -re mutato pointer
 * @return void nincs
 * @author Pjatacsuk Bence
-* @date 2011.10.30
+* @date 2011.11.24
 */
 
-void UpdateEnemy(Game *MyGame)
+
+void __UpdateEnemy(Game* MyGame)
 {
-	int j,i=0;
+	int i=0;
 	static int db = 0;
+	Projectile* iter = MyGame->player->proj_list->eleje->kovetkezo;
 	db++;
 	for(i=0;i<10;i++)
 	{
@@ -91,18 +92,20 @@ void UpdateEnemy(Game *MyGame)
 			NewEnemy(MyGame,i);				//ha egy ellenség eléri a képernyõ alját vesztünk egy életet
 			MyGame->player->life_left--;	//és új ellenfél kerül a listára
 		}
-		for(j=0;j<4;j++)
+		for(iter = MyGame->player->proj_list->eleje->kovetkezo;
+			iter != MyGame->player->proj_list->vege;
+			iter = iter->kovetkezo)
 		{
-			if(MyGame->player->projectile[j]->shot == 1)
+			if(iter->shot == 1)
 			{
-				if(f_abs(MyGame->player->projectile[j]->coord.x - MyGame->enemy[i]->coord.x) < 70 &&		//az ütközés vizsgálása
-					(f_abs((MyGame->player->projectile[j]->coord.y) - MyGame->enemy[i]->coord.y)) < 0.1f && 
+				if(f_abs(iter->coord.x - MyGame->enemy[i]->coord.x) < 70 &&		//az ütközés vizsgálása
+					(f_abs((iter->coord.y) - MyGame->enemy[i]->coord.y)) < 0.1f && 
 					MyGame->enemy[i]->dead != 1)
 				{
 					if(
-						 (f_abs(MyGame->player->projectile[j]->coord.x - MyGame->enemy[i]->coord.x)) < 0.1f &&	//a találat vizsgálása
-						 (f_abs((MyGame->player->projectile[j]->coord.y) - MyGame->enemy[i]->coord.y)) < 0.1f &&
-						 (MyGame->enemy[i]->type == MyGame->player->projectile[j]->type)
+						 (f_abs(iter->coord.x - MyGame->enemy[i]->coord.x)) < 0.1f &&	//a találat vizsgálása
+						 (f_abs((iter->coord.y) - MyGame->enemy[i]->coord.y)) < 0.1f &&
+						 (MyGame->enemy[i]->type == iter->type)
 					 )
 					{
 						
@@ -141,9 +144,9 @@ void UpdateEnemy(Game *MyGame)
 					
 						
 					}
-
-					FreeProjectile(MyGame->player->projectile[j]); //ütközés esetén a projectile elvész
-					NewProjectile(MyGame,j);
+					if(iter !=  MyGame->player->proj_list->vege)
+					iter = FreeListedProjectile(iter); //ütközés esetén a projectile elvész
+					NewListedProjectile(MyGame);
 				}
 
 			}
@@ -160,10 +163,8 @@ void UpdateEnemy(Game *MyGame)
 	{
 		db = 0;
 	}
-
-
-
 }
+
 
 /** Az enemy-k kirajzolásáért felelõs 
 * @param Game-re mutató pointer

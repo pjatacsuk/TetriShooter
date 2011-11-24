@@ -16,7 +16,8 @@
 typedef struct _Player {
 	Coord coord;		//koordináták
 	float speed;		//a játékos sebessége
-	Projectile *projectile[4]; // a négy lövedék tömbje
+	
+	ProjectileList *proj_list;
 	int life_left;				//a hátralévõ életek száma
 	ALLEGRO_BITMAP *bmp[5];		//a player hátralévõ életeihez igazitott bitmapok
 	ALLEGRO_SAMPLE* sample;	//a lövéshez a hang

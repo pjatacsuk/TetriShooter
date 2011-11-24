@@ -87,6 +87,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="_DeadAnim.c" />
     <ClCompile Include="_Enemy.c" />
+    <ClCompile Include="_Menu.c" />
     <ClCompile Include="_Player.c" />
     <ClCompile Include="_Projectile.c" />
     <ClCompile Include="_Resource.c" />

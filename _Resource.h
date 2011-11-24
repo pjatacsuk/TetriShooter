@@ -8,27 +8,27 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_audio.h>
 
-extern float FPS;			//fps nagysága
-extern float SCREEN_H;		//screen magassága
-extern float SCREEN_W;		//screen szélessége
+extern float FPS;										//fps nagysága
+extern float SCREEN_H;									//screen magassága
+extern float SCREEN_W;									//screen szélessége
 extern int redraw;
-
+extern int STOP_GAME;									// a game futas addig tart amig nem true
 
 extern enum Keys {UP,DOWN,LEFT,RIGHT,SPACE,SHIFT};		//billentyûk egyszerû kezelésére
 
 typedef struct _Resource {
 	
-	char name[256];		//resource listához a nevek
+	char name[256];										//resource listához a nevek
 
 } Resource;
 
 typedef struct _Coord {
-	float x,y;			//coordináták
+	float x,y;											//coordináták
 } Coord;
 
-float f_abs(float f);		//float absolut értékhez
+float f_abs(float f);									//float absolut értékhez
 
-int _own_random(int rnd);	//rand generator -> TODO
+int _own_random(int rnd);								//rand generator -> TODO - nem lesz a kozeljovoben
 
 
 #endif

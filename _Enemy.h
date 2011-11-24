@@ -11,14 +11,14 @@
 #include "_DeadAnim.h"
 
 typedef struct _Enemy {
-	Coord coord;			// koordináták az ellenfélnek
-	ALLEGRO_BITMAP* bmp;		//a bitmapja
-	DeadAnim *deadanim;			// a dead animciók tárolása
-	int type;		//ellenfél tipusa
-	float speed;	//ellenfél sebessége
-	int dead;		//hallot-e
-	int ready_to_free;	//fel lehet-e szabaditani a memoriát
-	int dead_counter;	//dead animációhoz szükséges számláló
+	Coord coord;										// koordináták az ellenfélnek
+	ALLEGRO_BITMAP* bmp;								//a bitmapja
+	DeadAnim *deadanim;									// a dead animciók tárolása
+	int type;											//ellenfél tipusa
+	float speed;										//ellenfél sebessége
+	int dead;											//hallot-e
+	int ready_to_free;									//fel lehet-e szabaditani a memoriát
+	int dead_counter;									//dead animációhoz szükséges számláló
 } Enemy;
 
 
