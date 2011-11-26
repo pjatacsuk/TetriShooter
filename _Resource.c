@@ -38,7 +38,9 @@ void CheckBitmap(ALLEGRO_BITMAP* bmp,char* path)
 	if(bmp == NULL)
 	{
 		STOP_GAME = 1; //leall a jatek mivel nem sikerult betolteni a bitmapop
-		printf("Nincs meg a kovetkezo bitmap %s",path);
+		
+		printf("Nincs meg a kovetkezo bitmap %s \n",path);
+		
 	}
 	
 }

@@ -242,7 +242,7 @@ void _FreeMyGame(Game* MyGame)
 	MyGame->player->coord.y = 500;
 	MyGame->player->speed = 15;
 	MyGame->player->life_left = 4;
-	MyGame->player->boost = al_load_sample("boost.wav");
+	MyGame->player->boost = al_load_sample("data\\sounds\\boost.wav");
 	//surprise incializálás
 	
 	//projectile inicializálás
@@ -337,7 +337,7 @@ bool _GameLoop(Game *MyGame)
 	{
 		ALLEGRO_EVENT ev; // allegro event struct
 		al_wait_for_event(MyGame->event_queue, &ev);
-
+			
 		if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
 			break;
@@ -494,6 +494,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			
 			if(strcmp(MyGame->resource[i]->name,"bg") == 0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+				
 				c = strtok(NULL,".");							// . pontig még egy szabdalás. eredmény ->index
 				
 				p = atoi(c);									//index integer alakitása
@@ -512,6 +519,12 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"player") == 0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
 				c = strtok(NULL,".");
 				
 				p = atoi(c);
@@ -525,7 +538,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"projectile") == 0)
 			{
-			
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+
 				c = strtok(NULL,".");
 				
 				p = atoi(c);
@@ -540,6 +559,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			
 			else if(strcmp(MyGame->resource[i]->name,"enemy") ==0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+
 				c = strtok(NULL,".");
 				
 				p = atoi(c);
@@ -552,6 +578,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"enemydead") ==0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+
 				c = strtok(NULL,".");
 				
 				p = atoi(c);
@@ -566,6 +599,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"surprise") == 0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\images\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+
 				c = strtok(NULL,".");
 				
 				p = atoi(c);
@@ -587,6 +627,12 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"shoot") == 0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\sounds\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
 					
 			
 				strcat(MyGame->resource[i]->name,".wav");								//hanganyang betöltése
@@ -596,6 +642,13 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 			}
 			else if(strcmp(MyGame->resource[i]->name,"death") == 0)
 			{
+				/* az ut alakitasa, tisztabb file struktura erdekeben */
+				char tmp[100];
+				strcpy(tmp,"data\\sounds\\");
+				strcat(tmp,MyGame->resource[i]->name);
+				strcpy(MyGame->resource[i]->name,tmp);
+				/* ***************************************************** */
+
 				strcat(MyGame->resource[i]->name,".wav");								//hanganyang betöltése
 				MyGame->death_sample = al_load_sample(MyGame->resource[i]->name);
 			}

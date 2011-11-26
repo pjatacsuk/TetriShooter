@@ -13,8 +13,10 @@ void NewSurprise(Surprise* surprise,char* path)
 {
 	int rnd;
 	char * pch;
+	int i;
 	int len;
-	char sample_path[50];
+	char sample_path[50] = {""};
+	char *tmp;
 	char* c = {"0"};
 	srand((unsigned)time(0));
 	
@@ -29,16 +31,26 @@ void NewSurprise(Surprise* surprise,char* path)
 	
 	surprise->bmp = al_load_bitmap(path);
 	CheckBitmap(surprise->bmp,path);
+
+	
 	
 	//wav file betöltése
-	pch = strrchr(path,'.');
-	len = pch - path + 1;
-	c[0] = path[len-2];
+ 	strcat(path,"\\");
+ 	tmp = strtok(path,"\\");
+	tmp = strtok(NULL,"\\");
+ 	tmp = strtok(NULL,"\\");
+	
+	
+	strcpy(sample_path,"data\\sounds\\");
+	pch = strrchr(tmp,'.');
+	len = pch - tmp + 1;
+	c[0] = tmp[len-2];
 	c[1] = '\0';
 	surprise->dir = atoi(c);
 	
-	strncpy(sample_path,path,len);
-	sample_path[len] = '\0';
+	strncat(sample_path,tmp,len);
+	
+	
 	strcat(sample_path,"wav");
 
   	surprise->sample = al_load_sample(sample_path);
