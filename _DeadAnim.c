@@ -14,8 +14,10 @@ void DeadAnimReader(Game *MyGame,char *dnm,int type)
 	//egy nagy string összeállítása könnyebb kezelhetõség érdekében
 	strcpy(MyGame->DeadAnimPath[type],dnm);
 	strcat(MyGame->DeadAnimPath[type],".0.png/");
+
 	strcat(MyGame->DeadAnimPath[type],dnm);
 	strcat(MyGame->DeadAnimPath[type],".1.png/");
+
 	strcat(MyGame->DeadAnimPath[type],dnm);
 	strcat(MyGame->DeadAnimPath[type],".2.png");
 
@@ -30,6 +32,7 @@ void DeadAnimReader(Game *MyGame,char *dnm,int type)
 char* DeadAnimCutter(Game *MyGame,int type)
 { 
 	//statikus változó segítségével végzem a feldarabolást, strtok féleképpen
+	//elégge instabil lehet ha netán tobb mint 3 darabra kene vagni
 	static int j = 0;
 	char ret[30];
 	int k=0;
@@ -69,6 +72,7 @@ void DeadAnimLoader(Game* MyGame,int i,int type)
 	{
 		strcpy(path,DeadAnimCutter(MyGame,type));
 		MyGame->enemy[i]->deadanim->bmp[j] = al_load_bitmap(path);
+		CheckBitmap(MyGame->enemy[i]->deadanim->bmp[j],path);
 	}
 }
 

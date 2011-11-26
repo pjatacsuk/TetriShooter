@@ -27,3 +27,18 @@ float f_abs(float f)
 	}
 
 }
+/** A bitmapok betoltesenek sikeresseget vizsgalja, ha nem sikerult betolteni a bitmapot akkor kilep a program
+* @param a Bitmapra mutato pinter, a bitmap path-ja
+* @return void nincs
+* @author Pjatacsuk Bence
+* @date 2011.11.25
+*/
+void CheckBitmap(ALLEGRO_BITMAP* bmp,char* path)
+{
+	if(bmp == NULL)
+	{
+		STOP_GAME = 1; //leall a jatek mivel nem sikerult betolteni a bitmapop
+		printf("Nincs meg a kovetkezo bitmap %s",path);
+	}
+	
+}

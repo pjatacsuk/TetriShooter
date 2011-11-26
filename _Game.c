@@ -391,23 +391,28 @@ bool _GameLoop(Game *MyGame)
 			switch(ev.keyboard.keycode)
 				{
 					case ALLEGRO_KEY_W:
+					case ALLEGRO_KEY_UP:
 						MyGame->Keys[UP] = 0;
 					break;
 				
 					case ALLEGRO_KEY_A:
+					case ALLEGRO_KEY_LEFT:
 						MyGame->Keys[LEFT] = 0;
 					break;
 
 					case ALLEGRO_KEY_S:
+					case ALLEGRO_KEY_DOWN:
 						MyGame->Keys[DOWN] = 0;
 						
 					break;
 
 					case ALLEGRO_KEY_D:
+					case ALLEGRO_KEY_RIGHT:
 						MyGame->Keys[RIGHT] = 0;
 						break;
 
 					case ALLEGRO_KEY_SPACE:
+					
 					MyGame->Keys[SPACE] = 0;
 					break;
 					case ALLEGRO_KEY_LSHIFT:
@@ -514,7 +519,7 @@ void _GameResourceReader(Game *MyGame,char *file_path)
 				strcat(c,".png");
 				strcat(MyGame->resource[i]->name,c);
 				MyGame->player->bmp[p] = al_load_bitmap(MyGame->resource[i]->name);
-
+				CheckBitmap(MyGame->player->bmp[p],MyGame->resource[i]->name);
 			
 				MyGame->MaxPlayerLife = p;//Max Player élet animáció számának kiszámítása (valójában az élet száma: p+1);
 			}
@@ -641,7 +646,10 @@ void GameBGLoad(Game* MyGame,int i)
 	}
 	
 	MyGame->bg_foreground = al_load_bitmap(MyGame->BgPath[MyGame->next_bgforeground_index][i]);
+	CheckBitmap(MyGame->bg_foreground,MyGame->BgPath[MyGame->next_bgforeground_index][i]);
+
 	MyGame->bg_background = al_load_bitmap(MyGame->BgPath[MyGame->next_bgbackground_index][0]);
+	CheckBitmap(MyGame->bg_background,MyGame->BgPath[MyGame->next_bgbackground_index][0]);
 }
 
 

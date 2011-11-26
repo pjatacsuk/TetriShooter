@@ -28,6 +28,8 @@ typedef struct _Coord {
 
 float f_abs(float f);									//float absolut értékhez
 
+void CheckBitmap(ALLEGRO_BITMAP* bmp,char* path);		//bitmapok ellenorzeserevan
+
 int _own_random(int rnd);								//rand generator -> TODO - nem lesz a kozeljovoben
 
 

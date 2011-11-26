@@ -16,7 +16,7 @@
 */
 void NewEnemy(Game* MyGame,int i)
 {
-	static float tier = 0;
+	static float tier = 0;				//statikus valtozo itt pont kapora jon, a kovetkezo enemy mindig 200px lesz feljebb
 	static int count = 0;
 	int rnd;
 	int type;
@@ -28,12 +28,15 @@ void NewEnemy(Game* MyGame,int i)
 	rnd = rand()%8;
 
 	MyGame->enemy[i]->coord.x = rnd * 75;
-	MyGame->enemy[i]->coord.y = tier; //statikus változóval könnyen tudok egyenletesen eloszló ellenfeleket beállítani
-	type = rand()%MyGame->MaxEnemy;
+	MyGame->enemy[i]->coord.y = tier; //statikus változóval könnyen tudok egyenletesen eloszló ellenfeleket beállítani, lasd feljebb
+	type = rand()%MyGame->MaxEnemy;  //uj ellenfel tipusanak megvalasztasa
 	MyGame->enemy[i]->type = type;
 	
 	//dead animationok inicializálása
 	MyGame->enemy[i]->bmp = al_load_bitmap(MyGame->EnemyPath[type]);
+	CheckBitmap(MyGame->enemy[i]->bmp,MyGame->EnemyPath[type]);
+	
+	
 	MyGame->enemy[i]->ready_to_free = 0;
 	MyGame->enemy[i]->dead_counter = 0;
 

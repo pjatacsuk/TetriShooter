@@ -28,6 +28,7 @@ void NewSurprise(Surprise* surprise,char* path)
 	}
 	
 	surprise->bmp = al_load_bitmap(path);
+	CheckBitmap(surprise->bmp,path);
 	
 	//wav file betöltése
 	pch = strrchr(path,'.');

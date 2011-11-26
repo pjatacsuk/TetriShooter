@@ -30,6 +30,7 @@ void NewListedProjectile(Game *MyGame)
 		srand((unsigned)time(0));
 		type = (rand()%(MyGame->MaxProjectile));
 		uj->bmp = al_load_bitmap(MyGame->ProjectilePath[type]);
+		CheckBitmap(uj->bmp,MyGame->ProjectilePath[type]);
 		uj->speed = 5.0f;
 		uj->type = type;
  		uj->coord.x = MyGame->player->coord.x;
@@ -38,12 +39,22 @@ void NewListedProjectile(Game *MyGame)
 		//--------------------------------------------------------
 		
 		//befuzes
-		uj->kovetkezo = iter;
-		uj->elozo = iter->elozo;
+		if(iter == MyGame->player->proj_list->vege)
+		{
+			uj->kovetkezo = iter;
+			uj->elozo = iter->elozo;
 
-		iter->elozo->kovetkezo = uj;
-		iter->elozo = uj;
+			iter->elozo->kovetkezo = uj;
+			iter->elozo = uj;
+		}
+		else
+		{
+ 			uj->kovetkezo = iter->kovetkezo;
+			uj->elozo = iter;
 
+			iter->kovetkezo->elozo = uj;
+			iter->kovetkezo = uj;
+		}
 
 
 }
@@ -78,7 +89,6 @@ bool ShootNextProjectile(ProjectileList* list)
 * @author Pjatacsuk Bence
 * @date 2011.11.24
 */
-
 Projectile* NextListedProjectile(ProjectileList* list)
 {
 	Projectile* iter = list->eleje->kovetkezo;
@@ -114,7 +124,7 @@ void UpdateListedProjectilePath(Game* MyGame)
 		if(iter->coord.y+80 < 0)
 		{
 			iter = FreeListedProjectile(iter);
-			NewListedProjectile(MyGame);
+			//NewListedProjectile(MyGame);
 			
   			
 		}
@@ -142,6 +152,7 @@ void UpdateListedProjectile(Game *MyGame)
 			NewListedProjectile(MyGame);							//ha nem volt nem ellot projectile, csinalunk egy ujjat
 			ShootNextProjectile(MyGame->player->proj_list);
 		}
+		NewListedProjectile(MyGame);
 		al_play_sample(MyGame->player->sample,0.2,0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 		
 		MyGame->Keys[SPACE] = 0;

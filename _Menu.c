@@ -56,6 +56,7 @@ Menu* InitMenu()
    al_init_ttf_addon();
 
    MyMenu->bg = al_load_bitmap("menubg.png");
+   CheckBitmap(MyMenu->bg,"menubg.png");
    MyMenu->font = al_load_ttf_font("TELE2.ttf",40,0);
 
    return MyMenu;
